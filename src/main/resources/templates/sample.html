@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Sample</title>
+  </head>
+  <body>
+    <h1>Sample</h1>
+    <div>
+      <form method="post" th:action="@{/sample/post}" th:object="${sampleForm}">
+        <div>
+          <label for="log">text01:</label>
+          <input type="text" th:field="*{text01}" />
+        </div>
+        <input type="submit" value="Send" />
+      </form>
+    </div>
+  </body>
+</html>
