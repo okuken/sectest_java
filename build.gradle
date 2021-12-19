@@ -28,7 +28,8 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	implementation("org.springframework.boot:spring-boot-starter-log4j2:2.6.1") //->log4j-core-2.14.1.jar
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2:2.6.1' //->log4j-core-2.14.1.jar
+	implementation 'org.apache.commons:commons-collections4:4.0'
 }
 
 configurations.implementation {
