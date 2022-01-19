@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Insecure Deserialization</title>
+  </head>
+  <body>
+    <h1>Insecure Deserialization</h1>
+    <div>
+      <h3>Serialize:</h3>
+      <div>
+        <form method="post" th:action="@{/deserialize/serialize}">
+          <label for="name">Name:</label>
+          <input type="text" name="name" th:value="${name}" />
+          <input type="submit" value="Serialize" />
+        </form>
+        -&gt;
+        <textarea name="serializedObject" th:text="${serializedObject}" rows="10" cols="50" readonly></textarea>
+      </div>
+    </div>
+    <hr>
+    <div>
+      <h3>Deserialize:</h3>
+      <form method="post" th:action="@{/deserialize/deserialize}">
+        <div>
+          <label for="object">Object:</label>
+          <textarea name="object" th:text="${object}" rows="10" cols="50"></textarea>
+          <input type="submit" value="Deserialize" />
+        </div>
+      </form>
+      -&gt;
+      <div>
+        Your name is <b><span th:text="${deserializedName}"></span></b>.
+        Your account type is <b><span th:text="${deserializedType}"></span></b>.
+      </div>
+    </div>
+    <hr>
+    <div>
+      <h3>You can generate a payload with ysoserial.</h3>
+      <pre>
+java -jar ysoserial.jar CommonsCollections2 calc | base64 -w0
+      </pre>
+    </div>
+  </body>
+</html>
